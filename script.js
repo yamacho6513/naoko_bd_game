@@ -31,7 +31,7 @@
     y: H * 0.4,
     vx: 0,
     vy: 0,
-    r: 14
+    r: 42
   };
 
   function setStatus(message) {
@@ -61,7 +61,7 @@
     gameOver = false;
     playerScore = 0;
     cpuScore = 0;
-    pauseBtn.textContent = "一時停止";
+    pauseBtn.textContent = "タイム";
     setStatus("ボールが自分の近くに来たらタップ。7点先取です。");
     serve(true);
   }
@@ -93,7 +93,9 @@
     }
 
     window.setTimeout(() => {
-      if (!gameOver) serve(who !== "player");
+      // 毎ラリー、次のボールは必ずYOU側から開始。
+      // CPUが一度ミスした後に、CPU側だけでラリーが完結して連続失点するのを防ぐ。
+      if (!gameOver) serve(true);
     }, 650);
   }
 
@@ -102,7 +104,7 @@
 
     const playerX = W * 0.27;
     const playerY = H * 0.79;
-    const reach = W * 0.15;
+    const reach = W * 0.17;
     const distance = Math.hypot(ball.x - playerX, ball.y - playerY);
 
     if (ball.x < W * 0.48 && distance < reach) {
@@ -174,9 +176,10 @@
     }
 
     // ネット衝突
+    const netPhysicsRadius = 14;
     if (
-      Math.abs(ball.x - netX) < ball.r + 8 &&
-      ball.y + ball.r > netTop
+      Math.abs(ball.x - netX) < netPhysicsRadius + 8 &&
+      ball.y + netPhysicsRadius > netTop
     ) {
       ball.vx *= -0.72;
       ball.x += ball.vx > 0 ? ball.r + 4 : -(ball.r + 4);
@@ -185,7 +188,7 @@
     // CPUの返球判定
     const cpuX = W * 0.73;
     const cpuY = H * 0.79;
-    const cpuReach = W * 0.14;
+    const cpuReach = W * 0.145;
     const cpuDistance = Math.hypot(ball.x - cpuX, ball.y - cpuY);
 
     const ballIsEnteringCpuZone =
@@ -634,7 +637,7 @@
 
   pauseBtn.addEventListener("click", () => {
     paused = !paused;
-    pauseBtn.textContent = paused ? "再開" : "一時停止";
+    pauseBtn.textContent = paused ? "再開" : "タイム";
     setStatus(paused ? "一時停止中" : "試合再開！");
     lastTime = performance.now();
   });

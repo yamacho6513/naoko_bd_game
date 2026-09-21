@@ -48,11 +48,6 @@ h1 {
   font-size: 13px;
 }
 
-.controls {
-  display: flex;
-  gap: 8px;
-}
-
 button {
   min-height: 44px;
   border: 1px solid var(--line);
@@ -95,8 +90,10 @@ canvas {
 
 .bottom-controls {
   display: flex;
-  justify-content: center;
-  padding: 12px 12px 8px;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
 }
 
 .hit {
@@ -108,13 +105,14 @@ canvas {
   font-size: 19px;
 }
 
-.help {
-  margin: 0;
-  padding: 2px 14px 14px;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.6;
-  text-align: center;
+.sub-controls {
+  display: flex;
+  width: min(100%, 420px);
+  gap: 8px;
+}
+
+.sub-controls button {
+  flex: 1;
 }
 
 @media (max-width: 520px) {
@@ -124,14 +122,6 @@ canvas {
 
   .topbar {
     align-items: flex-start;
-  }
-
-  .controls {
-    width: 100%;
-  }
-
-  .controls button {
-    flex: 1;
   }
 
   .game-shell {

@@ -14,10 +14,6 @@
         <h1>🏐 ナオコバースデー杯</h1>
         <p>7点先取。ボールが近づいたらタップ！</p>
       </div>
-      <div class="controls">
-        <button id="pauseBtn" type="button">一時停止</button>
-        <button id="restartBtn" type="button">最初から</button>
-      </div>
     </header>
 
     <p id="status" class="status" aria-live="polite">
@@ -31,11 +27,11 @@
 
       <div class="bottom-controls">
         <button id="hitBtn" class="hit" type="button">🏐 タップ！</button>
+        <div class="sub-controls">
+          <button id="pauseBtn" type="button">タイム</button>
+          <button id="restartBtn" type="button">最初から</button>
+        </div>
       </div>
-
-      <p class="help">
-        普通の返球はCPUが約70%で拾います。良いタイミングなら約50%、PERFECTなら約30%です。
-      </p>
     </section>
   </main>
 
